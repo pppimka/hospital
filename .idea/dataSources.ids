@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="MySQL - hospital@localhost" uuid="56660783-5c68-4766-a7d5-1d937da26b2f">
+    <database-info product="MySQL" version="5.1.52-community" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="hospital"/>
+    <table name="diagnosis_info" schema="" catalog="hospital" type="TABLE">
+      <column name="ID_Diagnosis" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="Description" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="ID_Diagnosis"/>
+      <exported-key name="FK_patients_diagnosis_diagnosis_info" table="patients_diagnosis" schema="" catalog="hospital" columns="ID_Diagnosis"/>
+    </table>
+    <table name="patient_info" schema="" catalog="hospital" type="TABLE">
+      <column name="ID_Patient" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Surname" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Birthday" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91"/>
+      <column name="PhoneNumber" sqlType="CHAR" length="50" precision="0" nullable="true" jdbcType="1"/>
+      <column name="e_mail" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Password" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <exported-key name="FK_patients_diagnosis_patient_info" table="patients_diagnosis" schema="" catalog="hospital" columns="ID_Patient"/>
+      <exported-key name="FK__patient_info" table="reception" schema="" catalog="hospital" columns="ID_Patient"/>
+      <index name="PrimaryKey" unique="false" columns="ID_Patient"/>
+    </table>
+    <table name="patients_diagnosis" schema="" catalog="hospital" type="TABLE">
+      <column name="ID_Patient" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="ID_Doctor" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="ID_Diagnosis" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Date" sqlType="DATE" length="10" precision="0" nullable="false" jdbcType="91"/>
+      <column name="Initial_Prescription" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="Current_Prescription" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="ID_Registration" sqlType="INT UNSIGNED" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID_Patient,ID_Doctor,ID_Diagnosis"/>
+      <foreign-key name="FK_patients_diagnosis_reception" columns="ID_Registration" ref-table="reception" ref-schema="" ref-catalog="hospital" ref-columns="ID_Registration" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_patients_diagnosis_diagnosis_info" columns="ID_Diagnosis" ref-table="diagnosis_info" ref-schema="" ref-catalog="hospital" ref-columns="ID_Diagnosis" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_patients_diagnosis_patient_info" columns="ID_Patient" ref-table="patient_info" ref-schema="" ref-catalog="hospital" ref-columns="ID_Patient" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_patients_diagnosis_prescription" columns="Initial_Prescription" ref-table="prescription" ref-schema="" ref-catalog="hospital" ref-columns="ID_Prescription" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_patients_diagnosis_prescription_2" columns="Current_Prescription" ref-table="prescription" ref-schema="" ref-catalog="hospital" ref-columns="ID_Prescription" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_patients_diagnosis_staff_info" columns="ID_Doctor" ref-table="staff_info" ref-schema="" ref-catalog="hospital" ref-columns="ID_Staff" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="prescription" schema="" catalog="hospital" type="TABLE">
+      <column name="ID_Prescription" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Drugs" sqlType="ENUM" length="2" precision="0" nullable="false" jdbcType="1" def="J04n"/>
+      <column name="Procedure" sqlType="ENUM" length="2" precision="0" nullable="false" jdbcType="1" def="J04n"/>
+      <column name="Operation" sqlType="ENUM" length="2" precision="0" nullable="false" jdbcType="1" def="J04n"/>
+      <primary-key name="PRIMARY" columns="ID_Prescription"/>
+      <exported-key name="FK_patients_diagnosis_prescription" table="patients_diagnosis" schema="" catalog="hospital" columns="Initial_Prescription"/>
+      <exported-key name="FK_patients_diagnosis_prescription_2" table="patients_diagnosis" schema="" catalog="hospital" columns="Current_Prescription"/>
+    </table>
+    <table name="reception" schema="" catalog="hospital" type="TABLE">
+      <column name="ID_Registration" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ID_Patient" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="ID_Doctor" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="ID_FinalDiagnosis" sqlType="INT UNSIGNED" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="DateOfAdmission" sqlType="DATE" length="10" precision="0" nullable="false" jdbcType="91"/>
+      <column name="DateOfDischarge" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="ID_Registration"/>
+      <foreign-key name="FK_reception_staff_information" columns="ID_Doctor" ref-table="staff_info" ref-schema="" ref-catalog="hospital" ref-columns="ID_Staff" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK__patient_info" columns="ID_Patient" ref-table="patient_info" ref-schema="" ref-catalog="hospital" ref-columns="ID_Patient" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_patients_diagnosis_reception" table="patients_diagnosis" schema="" catalog="hospital" columns="ID_Registration"/>
+    </table>
+    <table name="staff_info" schema="" catalog="hospital" type="TABLE">
+      <column name="ID_Staff" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" def="JzAn"/>
+      <column name="Surname" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" def="JzAn"/>
+      <column name="Birthday" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91"/>
+      <column name="TypeStaff" sqlType="ENUM" length="6" precision="0" nullable="false" jdbcType="1"/>
+      <column name="PhoneNumber" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12" def="JzAn"/>
+      <column name="e_mail" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="Password" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID_Staff"/>
+      <exported-key name="FK_patients_diagnosis_staff_info" table="patients_diagnosis" schema="" catalog="hospital" columns="ID_Doctor"/>
+      <exported-key name="FK_reception_staff_information" table="reception" schema="" catalog="hospital" columns="ID_Doctor"/>
+    </table>
+  </data-source>
+</component>

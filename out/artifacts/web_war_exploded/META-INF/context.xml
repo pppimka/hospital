@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Context>
+
+    <Resource name="jdbc/my_database"
+              auth="Container"
+              type="javax.sql.DataSource"
+              testWhileIdle="true"
+              testOnBorrow="true"
+              testOnReturn="false"
+              validationInterval="30000"
+              timeBetweenEvictionRunsMillis="30000"
+              maxActive="1000"
+              minIdle="100"
+              maxWait="10000"
+              initialSize="100"
+              removeAbandonedTimeout="60"
+              removeAbandoned="true"
+              logAbandoned="true"
+              minEvictableIdleTimeMillis="30000"
+              jmxEnabled="true"
+              username="root"
+              password="123"
+              driverClassName="com.mysql.jdbc.Driver"
+              connectionProperties="useUnicode=yes;characterEncoding=utf8;"
+              url="jdbc:mysql://localhost:3306/hospital"/>
+</Context>

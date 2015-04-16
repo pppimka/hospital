@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="persistenceUnit">
+        <class>model.DiagnosisInfoEntity</class>
+        <class>model.PatientInfoEntity</class>
+        <class>model.PatientsDiagnosisEntity</class>
+        <class>model.PrescriptionEntity</class>
+        <class>model.ReceptionEntity</class>
+        <class>model.StaffInfoEntity</class>
+        <properties>
+            <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/hospital"/>
+            <property name="toplink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="toplink.jdbc.user" value="root"/>
+            <property name="toplink.jdbc.password" value="123"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/hospital"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="123"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:mysql://localhost:3306/hospital"/>
+            <property name="openjpa.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
+            <property name="openjpa.ConnectionUserName" value="root"/>
+            <property name="openjpa.ConnectionPassword" value="123"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/hospital"/>
+            <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="eclipselink.jdbc.user" value="root"/>
+            <property name="eclipselink.jdbc.password" value="123"/>
+        </properties>
+    </persistence-unit>
+</persistence>
